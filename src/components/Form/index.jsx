@@ -6,7 +6,7 @@ import { Notifications, notifications } from '@mantine/notifications';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from '../../services/firebase.config';
 
-const Formulario = () => {
+const Form = () => {
   
   const [stringValue, setStringValue] = useInputState('');
   const [error, setError] = useState('')
@@ -72,4 +72,4 @@ const Formulario = () => {
   );
 }
 
-export default Formulario
+export default Form

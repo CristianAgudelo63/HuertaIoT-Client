@@ -1,9 +1,7 @@
 (function(d, s, id) {
   if (d.getElementById(id)) {
-      if (window.__TOMORROW__) {
-          window.__TOMORROW__.renderWidget();
-      }
-      return;
+    if (window.__TOMORROW__) {window.__TOMORROW__.renderWidget();}
+    return;
   }
   const fjs = d.getElementsByTagName(s)[0];
   const js = d.createElement(s);
@@ -13,15 +11,18 @@
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'tomorrow-sdk');
 
-const Clima = () => {
+import Home from "../../pages";
+
+const Weather = () => {
   return (
     <>
+      <Home/>
       <div className="tomorrow"
-           data-location-id="021074"
-           data-language="ES"
-           data-unit-system="METRIC"
-           data-skin="light"
-           data-widget-type="upcoming"
+        data-location-id="021074"
+        data-language="ES"
+        data-unit-system="METRIC"
+        data-skin="light"
+        data-widget-type="upcoming"
         >
           <a
             href="https://www.tomorrow.io/weather-api/"
@@ -40,4 +41,4 @@ const Clima = () => {
   )
 }
 
-export default Clima
+export default Weather

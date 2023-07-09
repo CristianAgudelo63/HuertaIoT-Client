@@ -4,15 +4,14 @@ const options = {
   method: 'GET',
   url: 'https://api.tomorrow.io/v4/weather/realtime',
   params: {
-    location: import.meta.env.VITE_REALTIME_WEATHER_API_KEY,
+    location: import.meta.env.VITE_REALTIME_WEATHER_LOCATION,
     units: 'metric',
-    apikey: import.meta.env.VITE_REALTIME_WEATHER_LOCATION
+    apikey: import.meta.env.VITE_REALTIME_WEATHER_API_KEY
   },
   headers: {accept: 'application/json'}
 };
 
-axios
-  .request(options)
+axios.request(options)
   .then(function (response) {
     console.log(response.data);
   })

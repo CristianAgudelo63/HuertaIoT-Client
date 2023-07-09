@@ -1,12 +1,12 @@
 import { MantineProvider, Box, createStyles} from '@mantine/core';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Encabezado from './components/Header'
-import Home from './pages/Home'
+import Head from './components/Header'
+import Main from './pages'
 import Page404 from './pages/Page404'
 
 const useStyles = createStyles(() => ({
-  fondo: {
+  background: {
     backgroundImage: 'url(/bg.jpg)',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -21,11 +21,11 @@ const App = () => {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={{ fontFamily: 'Montserrat' }}>
-      <Box className={classes.fondo}>
-        <Encabezado/>
+      <Box className={classes.background}>
+        <Head/>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Main />} />
             <Route path='*' element={<Page404 />} />
           </Routes>
         </BrowserRouter>

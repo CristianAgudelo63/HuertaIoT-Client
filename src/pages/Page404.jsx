@@ -1,4 +1,4 @@
-import { createStyles, Title, Text, Container, rem } from '@mantine/core';
+import { createStyles, Title, Text, Container, rem, Group, Button } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
 
@@ -32,18 +32,30 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.xl,
     marginBottom: `calc(${theme.spacing.xl} * 1.5)`,
   },
+
+  container: {
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    padding: theme.spacing.xl,
+    borderRadius: theme.radius.md,
+    width: "100%",
+  }
 }));
 
 const Page404 = () => {
   const { classes } = useStyles();
 
   return (
-    <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>Error 404</Title>
-      <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        Ups!, no se encontró el contenido
-      </Text>
+    <Container className={classes.container}>
+       <div className={classes.label}>404</div>
+        <Title className={classes.title}>Error 404</Title>
+        <Text color="dimmed" size="lg" align="center" className={classes.description}>
+          Ups!, no se encontró el contenido
+        </Text>
+        {/* <Group position="center">
+        <Button variant="subtle" size="md">
+          Volver al Inicio
+        </Button>
+      </Group> */}
     </Container>
   );
 }

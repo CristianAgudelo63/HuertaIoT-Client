@@ -3,7 +3,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { FcGoogle } from 'react-icons/fc'
 
 import { Logo } from './Logo';
-import Formulario from '../Formulario';
+import Form from '../Form';
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-const Encabezado = () => {
+const Head = () => {
   const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -38,7 +38,7 @@ const Encabezado = () => {
             
             <Modal centered opened={opened} onClose={close} title="Ingresar Sesión">
 
-              <Formulario />
+              <Form />
 
               {/* <Group position="center" mt="xl">
                 <Button position="center" onClick={open} leftIcon={<FcGoogle/>} variant="light" radius="md">Iniciar Sesión con Google</Button>
@@ -54,4 +54,4 @@ const Encabezado = () => {
   );
 }
 
-export default Encabezado
+export default Head

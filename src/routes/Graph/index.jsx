@@ -1,4 +1,5 @@
 import React from 'react';
+import Home from '../../pages';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -45,8 +46,13 @@ export const data = {
   ],
 };
 
-const Grafica = () => {
-  return <Line options={options} data={data} />;
+const Graph = () => {
+  return (
+    <>
+      <Home/>
+      <Line options={options} data={data} />
+    </>
+  )
 }
 
-export default Grafica
+export default Graph
