@@ -1,8 +1,8 @@
-import { MantineProvider, Box, createStyles} from '@mantine/core';
+import { MantineProvider, Box, createStyles } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Head from './components/Header'
-import Main from './pages'
+import Main from './pages/Main'
 import Page404 from './pages/Page404'
 
 const useStyles = createStyles(() => ({

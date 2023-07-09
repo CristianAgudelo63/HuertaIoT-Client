@@ -1,5 +1,4 @@
-import React from 'react';
-import Home from '../../pages';
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,9 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import faker from 'faker';
+  Filler,
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -20,39 +18,47 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler,
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
+const limite = [600,600,600,600,600,600,600,600,600,600];
+let datos = [100, 569, 200, 360, 800, 400, 300, 200, 25, 305];
+let tiempo = [0,10,20,30,40,50,60,70,80,90];
+
+const data = {
+  labels: tiempo,
+  datasets: [
+    // Cada una de las líneas del gráfico
+    {
+      label: "Humedad en el suelo",
+      data: datos,
+      tension: 0.5,
+      fill: true,
+      borderColor: "rgb(34, 139, 230)",
+      backgroundColor: "rgba(34, 139, 230, .5)",
+      pointRadius: 5,
+      pointBorderColor: "rgb(34, 139, 230)",
+      pointBackgroundColor: "rgb(34, 139, 230)",
+    },
+    {
+      label: 'Límite de Humedad',
+      data: limite,
+      fill: false,
+      borderColor: 'rgba(255,0,0,.5)'
+    }
+  ],
+};
+
+const options = {
+  scales: {
+    y: {
+      min: 0,
+      max: 1024,
     }
   },
 };
 
-const labels = ['1s', '2s', '3s', '4s','5s', '6s', '7s', '8s', '9s', '10s'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1024 })),
-      borderColor: '#228be6',
-      backgroundColor: '#228be6',
-    },
-  ],
-};
-
-const Graph = () => {
-  return (
-    <>
-      <Home/>
-      <Line options={options} data={data} />
-    </>
-  )
+export default function Graph() {
+  return <Line data={data} options={options} />;
 }
-
-export default Graph
