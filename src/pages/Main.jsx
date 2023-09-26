@@ -1,8 +1,8 @@
 import { Container, createStyles, Box } from '@mantine/core'
-import Navegacion from './../components/NavBar'
+import NavBar from '../components/NavBar'
 
 const useStyles = createStyles((theme) => ({
-  contenedor: {
+  container: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     padding: theme.spacing.xl,
     borderRadius: theme.radius.md,
@@ -10,17 +10,17 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-const Home = () =>{
+const Main = () =>{
 
   const { classes } = useStyles()
 
   return(
     <Box component='main'>
-      <Container className={classes.contenedor}>
-        <Navegacion/>
+      <Container className={classes.container}>
+        <NavBar/>
       </Container>
     </Box>
   )
 } 
 
-export default Home
+export default Main

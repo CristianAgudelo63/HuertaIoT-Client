@@ -1,61 +1,52 @@
-import { Tabs, Text, createStyles, Grid  } from '@mantine/core'
+import { Tabs, Text, createStyles } from '@mantine/core'
+
 import { BsGraphUp } from 'react-icons/bs'
 import { WiDayCloudyGusts } from 'react-icons/wi';
 import { LuSettings2 } from 'react-icons/lu';
 
-import Page404 from './../../pages/Page404'
-
-import Deslizar from './../../routes/Domotizacion'
-import Grafica from './../../routes/Grafica'
-import Clima from './../../routes/Clima'
+import Graph from '../../routes/Graph';
+import Weather from '../../routes/Weather';
+import Controls from '../../routes/Controls';
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
-    },
+    }
   }
 }));
 
-const Navegacion = () => {
+const NavBar = () => {
 
   const { classes } = useStyles()
 
   return (
-    <Tabs defaultValue="grafica">
+    <Tabs keepMounted={true} defaultValue="graph">
       <Tabs.List grow>
-        <Tabs.Tab value="grafica" icon={<BsGraphUp/>}>
-          <Text className={classes.hiddenMobile}>Gráfica</Text>
+        <Tabs.Tab value="graph" icon={<BsGraphUp size={22}/>}>
+          <Text className={classes.hiddenMobile}>Gráfica Sensor</Text>
         </Tabs.Tab>
-        <Tabs.Tab value="clima" icon={<WiDayCloudyGusts/>}>
-          <Text className={classes.hiddenMobile}>Clima</Text>
+        <Tabs.Tab value="weather" icon={<WiDayCloudyGusts size={22}/>}>
+          <Text className={classes.hiddenMobile}>Clima Ambiental</Text>
         </Tabs.Tab>
-        <Tabs.Tab value="configuracion" icon={<LuSettings2 />}>
-          <Text className={classes.hiddenMobile}>Domotización</Text>
+        <Tabs.Tab value="controls" icon={<LuSettings2 size={22}/>}>
+          <Text className={classes.hiddenMobile}>Controles</Text>
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="grafica" pt="xs">
-        <Grafica/>
+      <Tabs.Panel value='graph' pt="xs">
+        <Graph />
       </Tabs.Panel>
 
-      <Tabs.Panel value="clima" pt="xs">
-        <Clima/>
+      <Tabs.Panel value="weather" pt="xs">
+        <Weather/>
       </Tabs.Panel>
 
-       <Tabs.Panel value="configuracion" pt="xs">
-          <Grid grow gutter="xs">
-            <Grid.Col span={4}><Deslizar/></Grid.Col>
-            <Grid.Col span={4}><Deslizar/></Grid.Col>
-          </Grid>
-          <Grid grow gutter="xs">
-            <Grid.Col span={4}><Deslizar/></Grid.Col>
-            <Grid.Col span={4}><Deslizar/></Grid.Col>
-          </Grid>
-        </Tabs.Panel>
-
+      <Tabs.Panel value="controls" pt="xs">
+        <Controls/>
+      </Tabs.Panel>
     </Tabs>
   );
 }
 
-export default Navegacion
+export default NavBar
