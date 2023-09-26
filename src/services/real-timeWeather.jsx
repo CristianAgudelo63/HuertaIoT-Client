@@ -1,4 +1,12 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+const [clima, setClima] = useState('');
+const newData = clima
+
+useEffect(() => {
+  sendData();
+}, []);
 
 const options = {
   method: 'GET',
@@ -13,8 +21,23 @@ const options = {
 
 axios.request(options)
   .then(function (response) {
-    console.log(response.data);
+    newData = response.data
+    setClima(newData);
   })
   .catch(function (error) {
     console.error(error);
-  });
+  }
+  );
+
+const sendData = async (newData) => {
+  try {
+    await axios.put(
+      import.meta.env.VITE_FIREBASE_URL_CLIMA_AMBIENTAL,JSON.stringify(newData)
+    );
+    console.log('Datos enviados correctamente');
+  } catch (error) {
+    console.error('Error al enviar los datos:', error);
+  }
+};
+
+window.setInterval(sendData,2000)

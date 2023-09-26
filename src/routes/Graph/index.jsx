@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Grid, Text, Title as Titulo } from '@mantine/core';
 import axios from 'axios';
 import { Line } from "react-chartjs-2";
 import {
@@ -24,36 +25,46 @@ ChartJS.register(
   Filler,
 );
 
-export default function Graph() {
+const Graph = () => {
 
   const [data, setData] = useState('');
-
-  const limit = [600,600,600,600,600];
-  const time = ["0'","30'", "60'", "90'", "120'"];
-  const newData = [data,data,data,data,data]
+  const [value, setValue] = useState('');
+  const newData = [data]
+  const newValue = ''
   
   useEffect(() => {
     fetchData();
+    fetchValue();
   }, []);
 
-  const fetchData = async () => {
-   try {
-      const response = await axios.get(
-        'https://dev-huerta-iot-fesa-default-rtdb.firebaseio.com/A0.json',JSON.stringify(newData)
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error('Error al obtener los datos:', error);
-    }
-  };
+  const fetchData = async  () => {
+    try {
+       const response = await axios.get(
+         'https://dev-huerta-iot-fesa-default-rtdb.firebaseio.com/HUMEDAD.json',JSON.stringify(newData)
+       );
+       setData(response.data);
+     } catch (error) {
+       console.error('Error al obtener los datos:', error);
+     }
+   };
+
+   const fetchValue = async  () => {
+    try {
+       const response = await axios.get(
+         'https://dev-huerta-iot-fesa-default-rtdb.firebaseio.com/ELECTROVALVULA.json',JSON.stringify(newValue)
+       );
+       setValue(response.value);
+     } catch (error) {
+       console.error('Error al obtener los datos:', error);
+     }
+   };
 
   const datos = {
-    labels: time,
+    labels: [0],
     datasets: [
-      // Cada una de las líneas del gráfico
       {
-        label: "Humedad en el suelo",
-        data: newData,
+        label: "Humedad Del Suelo",
+        data: [0],
         tension: 0.5,
         fill: true,
         borderColor: "rgb(34, 139, 230)",
@@ -62,15 +73,9 @@ export default function Graph() {
         pointBorderColor: "rgb(34, 139, 230)",
         pointBackgroundColor: "rgb(34, 139, 230)",
       },
-      {
-        label: 'Límite de Humedad',
-        data: limit,
-        fill: false,
-        borderColor: 'rgba(255,0,0,.5)'
-      }
     ],
-  };
-  
+  }
+
   const options = {
     scales: {
       y: {
@@ -78,7 +83,32 @@ export default function Graph() {
         max: 1023,
       }
     },
-  };
+  }
+
+  const timeOfRefress = () => {
+    let times = new Date()
+    times = times.getHours() +':'+ times.getMinutes() +':'+ times.getSeconds()
+
+    datos.labels.push(times)
+    datos.datasets[0].data.push(newData)
+  }
+
+  window.setInterval(fetchData,2000)
+  window.setInterval(fetchValue,2000)
+  window.setInterval(timeOfRefress(),2000)
   
-  return <Line data={datos} options={options} />
+  return (
+    <Grid grow gutter="sm">
+      <Grid.Col span={7}>
+        <Line data={datos} options={options} />
+      </Grid.Col>
+      <Grid.Col span={3}>
+        <Titulo ta="center" order={2}>Información:</Titulo>
+        <Text>%Humedad Actual: {newData}</Text>
+        <Text>%Humedad Ideal: 600</Text>
+      </Grid.Col>
+    </Grid>
+  )
 }
+
+export default Graph;

@@ -18,18 +18,18 @@ const Controls = () => {
   return (
     <>
 
-    <Container p={0} size={600}>
+    {/* <Container p={0} size={600}>
       <Text size="lg" color="dimmed" className={classes.description}>
         Necesitas Iniciar Sesión para acceder a los controles de configuración
       </Text>
-    </Container>
+    </Container> */}
 
-    {/* <Switches
+    <Switches
       label="Apagar / Encender"
       onLabel="ON" offLabel="OFF"
       description="Activa o desactiva la electroválvula"
       radius="lg"
-    /> */}
+    />
 
     </>
   );
