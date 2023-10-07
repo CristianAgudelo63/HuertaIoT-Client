@@ -32,6 +32,7 @@ const Graph = () => {
   const [value2, setValue2] = useState("");
 
   const newData = [data];
+  const nuevosDatos = [...newData]
   const electrovavula1 = [value1];
   const electrovavula2 = [value2];
 
@@ -86,7 +87,7 @@ const Graph = () => {
     datasets: [
       {
         label: "Humedad Del Terreno",
-        data: newData,
+        data: nuevosDatos,
         tension: 0.5,
         fill: true,
         borderColor: "rgb(34, 139, 230)",

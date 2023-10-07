@@ -17,20 +17,20 @@ const Controls = () => {
   
   return (
     <>
-    <Container>
+
+    <Container p={0} size={600}>
+      <Text size="lg" color="dimmed" className={classes.description}>
+        Necesitas Iniciar Sesión para acceder a los controles de las electroválvulas.
+      </Text>
+    </Container>
+
+    {/* <Container>
       <Text ta="center">
       Si las electroválvulas no se activaron o desactivaron automáticamente, las puede activar y desactivar manualmente desde el interruptor. El valor de la electroválvula es leido de la base de datos.
       </Text>
     </Container>
 
     <Divider my="sm" />
-
-    {/* <Container p={0} size={600}>
-      <Text size="lg" color="dimmed" className={classes.description}>
-        Necesitas Iniciar Sesión para acceder a los controles de las electroválvulas.
-      </Text>
-    </Container> */}
-
 
     <Grid grow justify="center" align="center">
       <Grid.Col span={4}>
@@ -50,7 +50,7 @@ const Controls = () => {
           radius="lg"
         />
       </Grid.Col>
-    </Grid>
+    </Grid> */}
 
     </>
   );
