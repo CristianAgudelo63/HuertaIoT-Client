@@ -32,14 +32,14 @@ const Graph = () => {
   const [value2, setValue2] = useState("");
 
   const newData = [data];
-  const nuevosDatos = [...newData]
-  const electrovavula1 = [value1];
-  const electrovavula2 = [value2];
+  const nuevosDatos = [...newData ];
+  const electrovavula1 = value1;
+  const electrovavula2 = value2;
 
   useEffect(() => {
     fetchData();
-    fetchElectrovalvula1()
-    fetchElectrovalvula2()
+    fetchElectrovalvula1();
+    fetchElectrovalvula2();
   }, []);
 
   const fetchData = async () => {
@@ -68,19 +68,6 @@ const Graph = () => {
       console.error("Error al obtener los datos:", error);
     }
   };
-
-  const elements = [
-    { info: "%Humedad", status: newData },
-    { info: "Electroválvula 1", status: electrovavula1 },
-    { info: "Electroválvula 2", status: electrovavula2 },
-  ];
-
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
-      <td>{element.info}</td>
-      <td>{element.status}</td>
-    </tr>
-  ));
   
   const datos = {
     labels: [0],
@@ -108,6 +95,31 @@ const Graph = () => {
     },
   };
 
+  const porcentaje = () => (newData*100)/1023
+
+  const info = () => {
+    if (newData >= 500) {
+      return 'Humedo'
+    } else {
+      return 'Seco'
+    }
+  }
+
+  const elements = [
+    { info: "Sensor de Humedad", status: newData },
+    { info: "Humedad (%)", status: porcentaje().toFixed(2) },
+    { info: "Terreno", status: info() },
+    { info: "Electroválvula 1", status: electrovavula1 },
+    { info: "Electroválvula 2", status: electrovavula2 },
+  ];
+
+  const rows = elements.map((element) => (
+    <tr key={element.name}>
+      <td>{element.info}</td>
+      <td>{element.status}</td>
+    </tr>
+  ));
+
   const refress = () => {
     let times = new Date();
     times = `${times.getHours()}:${times.getMinutes()}:${times.getSeconds()}`;
@@ -132,7 +144,7 @@ const Graph = () => {
           <thead>
             <tr>
               <th>Parámetro</th>
-              <th>Lectura</th>
+              <th>Valor</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
