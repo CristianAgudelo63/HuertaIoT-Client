@@ -53,12 +53,7 @@ const Page404 = () => {
     <Container className={classes.container}>
       <div className={classes.label}>404</div>
       <Title className={classes.title}>Error 404</Title>
-      <Text
-        color="dimmed"
-        size="lg"
-        align="center"
-        className={classes.description}
-      >
+      <Text color="dimmed" size="lg" align="center" className={classes.description}>
         Ups!, no se encontró el contenido
       </Text>
     </Container>

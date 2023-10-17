@@ -4,7 +4,7 @@ import { useForm } from "@mantine/form";
 import { useInputState } from "@mantine/hooks";
 import { Notifications, notifications } from "@mantine/notifications";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../services/firebase.config";
+import { app } from "../../api/firebase.config";
 
 const Form = () => {
   const [stringValue, setStringValue] = useInputState("");

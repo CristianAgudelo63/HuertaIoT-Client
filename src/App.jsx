@@ -1,9 +1,8 @@
 import { MantineProvider, Box, createStyles } from "@mantine/core";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthContextProvider } from './context'
 
 import Head from "./components/Header";
-import Main from "./pages/Main";
-import Page404 from "./pages/Page404";
+import { Rutas } from "./routers"
 
 const useStyles = createStyles(() => ({
   background: {
@@ -19,20 +18,13 @@ const App = () => {
   const { classes } = useStyles();
 
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{ fontFamily: "Montserrat" }}
-    >
-      <Box className={classes.background}>
-        <Head />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="*" element={<Page404 />} />
-          </Routes>
-        </BrowserRouter>
-      </Box>
+    <MantineProvider withGlobalStyles withNormalizeCSS theme={{ fontFamily: "Montserrat" }}>
+      <AuthContextProvider>
+        <Box className={classes.background}>
+          <Head />
+          <Rutas />
+        </Box>
+      </AuthContextProvider>
     </MantineProvider>
   );
 };

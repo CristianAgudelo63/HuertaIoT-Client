@@ -26,7 +26,7 @@ ChartJS.register(
 
 import { firebaseHumedad, firebaseElectrovalvula1, firebaseElectrovalvula2 } from "../../api/axiosAPI";
 
-const Graph = () => {
+const Info = () => {
   const [data, setData] = useState("");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
@@ -154,4 +154,4 @@ const Graph = () => {
   );
 };
 
-export default Graph;
+export default Info;
