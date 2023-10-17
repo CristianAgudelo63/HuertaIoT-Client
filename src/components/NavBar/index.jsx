@@ -4,9 +4,9 @@ import { BsGraphUp } from "react-icons/bs";
 import { WiDayCloudyGusts } from "react-icons/wi";
 import { LuSettings2 } from "react-icons/lu";
 
-import Graph from "../../routes/Graph";
-import Weather from "../../routes/Weather";
-import Controls from "../../routes/Controls";
+import Info from "./../../routers/navBar/Info";
+import Weather from "./../../routers/navBar/Weather";
+import Controls from "./../../routers/navBar/Controls";
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
@@ -20,9 +20,9 @@ const NavBar = () => {
   const { classes } = useStyles();
 
   return (
-    <Tabs keepMounted={true} defaultValue="graph">
+    <Tabs keepMounted={true} defaultValue="info">
       <Tabs.List grow>
-        <Tabs.Tab value="graph" icon={<BsGraphUp size={22} />}>
+        <Tabs.Tab value="info" icon={<BsGraphUp size={22} />}>
           <Text className={classes.hiddenMobile}>Monitoreo</Text>
         </Tabs.Tab>
         <Tabs.Tab value="weather" icon={<WiDayCloudyGusts size={22} />}>
@@ -33,8 +33,8 @@ const NavBar = () => {
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="graph" pt="xs">
-        <Graph />
+      <Tabs.Panel value="info" pt="xs">
+        <Info />
       </Tabs.Panel>
 
       <Tabs.Panel value="weather" pt="xs">

@@ -1,15 +1,8 @@
-import {
-  createStyles,
-  Header,
-  Group,
-  Button,
-  Box,
-  Title,
-  Modal,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { createStyles, Header, Group, Button, Box, Title } from "@mantine/core";
 import { Logo } from "./Logo";
-import Form from "../Form";
+import { UserAuth } from "../../context";
+import { notifications } from '@mantine/notifications'
+import { FcGoogle } from 'react-icons/fc'
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
@@ -27,7 +20,35 @@ const useStyles = createStyles((theme) => ({
 
 const Head = () => {
   const { classes } = useStyles();
-  const [opened, { open, close }] = useDisclosure(false);
+  const { googleSignIn, user, logOut } = UserAuth();
+
+  const iniciarSesion = async() => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log('Error al Iniciar Sesión');
+      notifications.show({
+        message: 'Error al Iniciar Sesión',
+        autoClose: 500,
+      });
+    }
+  }
+
+  const cerrarSesion = async() => {
+    try {
+      await logOut();
+      notifications.show({
+        message: 'Error al Iniciar Sesión',
+        autoClose: 500,
+      });
+    } catch (error) {
+      console.log('Error al Cerrar Sesión');
+      notifications.show({
+        message: 'Error al Cerrar Sesión',
+        autoClose: 500,
+      });
+    }
+  }
 
   return (
     <Box pb={25}>
@@ -40,25 +61,12 @@ const Head = () => {
           </Title>
 
           <Group className={classes.hiddenMobile}>
-            <Button onClick={open} variant="light" radius="md">
+            <Button leftIcon={<FcGoogle />} onClick={iniciarSesion} variant="light" radius="md">
               Iniciar Sesión
             </Button>
-            <Modal
-              centered
-              opened={opened}
-              onClose={close}
-              title="Ingresar Sesión"
-            >
-              <Form />
-            </Modal>
           </Group>
 
-          <Button
-            className={classes.hiddenDesktop}
-            variant="light"
-            onClick={open}
-            radius="md"
-          >
+          <Button leftIcon={<FcGoogle />} className={classes.hiddenDesktop} variant="light" onClick={iniciarSesion} radius="md">
             Iniciar Sesión
           </Button>
         </Group>
