@@ -28,8 +28,8 @@ const Form = () => {
       try {
         await signInWithEmailAndPassword(auth, correo, contraseña);
         notifications.show({
-          title: "Inicio de Sesión",
-          message: "Inicio de sesión satisfactorio!. Cierra la ventana emergente",
+          title: "Inicio de Sesión Satisfactorio!",
+          message: "Cierra la ventana emergente",
           color: "green",
           autoClose: 5000,
         })

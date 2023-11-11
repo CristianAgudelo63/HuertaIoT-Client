@@ -4,7 +4,7 @@ import { notifications } from '@mantine/notifications'
 
 const Switch = () => {
 
-  const { user, logOut } = UserAuth();
+  const { logOut } = UserAuth();
 
   const cerrarSesion = async() => {
     try {
