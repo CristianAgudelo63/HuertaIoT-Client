@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Title as Titulo, Table } from "@mantine/core";
 
-import { firebaseHumedad } from "../../../api/axiosAPI";
+import { firebase } from "../../../api/axiosAPI";
 
 const Tables = () => {
   const [data, setData] = useState("");
@@ -12,7 +12,7 @@ const Tables = () => {
 
   const fetchData = async () => {
     try {
-      const res = await firebaseHumedad.get(`/HUMEDAD.json`)
+      const res = await firebase.get(`/HUMEDAD.json`)
       setData(res.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);

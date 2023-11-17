@@ -1,14 +1,6 @@
 import axios from "axios";
 
-export const firebaseHumedad = axios.create({
-  baseURL: import.meta.env.VITE_FIREBASE_URL,
-});
-
-export const firebaseElectrovalvula1 = axios.create({
-  baseURL: import.meta.env.VITE_FIREBASE_URL,
-});
-
-export const firebaseElectrovalvula2 = axios.create({
+export const firebase = axios.create({
   baseURL: import.meta.env.VITE_FIREBASE_URL,
 });
 
