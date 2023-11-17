@@ -3,12 +3,13 @@ import { TextInput, PasswordInput, Button, Box, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useInputState } from "@mantine/hooks";
 import { Notifications, notifications } from "@mantine/notifications";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../api/firebase.config";
+import { app, auth } from "../../api/firebase.config"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 const Form = () => {
   const [stringValue, setStringValue] = useInputState("");
-  const [error, setError] = useState("");
+  const [registrado, setRegistrado] = useState(true);
 
   const form = useForm({
     initialValues: {
@@ -17,46 +18,51 @@ const Form = () => {
     },
   });
 
-  const auth = getAuth(app);
-  const user = auth.currentUser;
+  const iniciarSesion = async(e) => {
+    e.preventDefault();
 
-  const handleSubmit = async () => {
-    await createUserWithEmailAndPassword()
-      .then((user) => {
-        if (user !== null) {
-          console.log(user);
-        }
-      })
-      .catch((error) => {
-        error = error.message;
-      });
-  };
+    const correo = e.target.email.value;
+    const contraseña = e.target.pass.value;
+
+    if(registrado){
+      try {
+        await signInWithEmailAndPassword(auth, correo, contraseña);
+        notifications.show({
+          title: "Inicio de Sesión Satisfactorio!",
+          message: "Cierra la ventana emergente",
+          color: "green",
+          autoClose: 5000,
+        })
+      } catch (error) {
+        notifications.show({
+          title: "Error",
+          message: "Hubo un error al iniciar sesión. Intente nuevamente",
+          color: "red",
+          autoClose: 5000,
+        })
+      }
+    }
+  }
 
   return (
     <Box maw={400} mx="auto">
       <Notifications />
 
-      {error &&
-        notifications.show({
-          title: "Error",
-          message: "Hubo un error",
-          color: "red",
-          autoClose: 5000,
-        })}
-
-      <form onSubmit={form.onSubmit(() => handleSubmit())}>
+      <form onSubmit={iniciarSesion}>
         <TextInput
           label="Correo"
           placeholder="correo@correo.com"
           value={stringValue}
           onChange={setStringValue}
           withAsterisk
+          id="email"
           {...form.getInputProps("email")}
         />
         <PasswordInput
           placeholder="Contraseña"
           label="Contraseña"
           withAsterisk
+          id="pass"
           {...form.getInputProps("password")}
         />
 
