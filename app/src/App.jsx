@@ -2,15 +2,18 @@ import { MantineProvider, Box, createStyles } from "@mantine/core";
 import { AuthContextProvider } from './context'
 
 import Head from "./components/Header";
+import Footer from "./components/Footer";
 import { Rutas } from "./routers"
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   background: {
     backgroundImage: "url(/bg.jpg)",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     height: "100vh",
+    display: 'flex',
+    flexDirection: 'column'
   },
 }));
 
@@ -23,6 +26,7 @@ const App = () => {
         <Box className={classes.background}>
           <Head />
           <Rutas />
+          <Footer/>
         </Box>
       </AuthContextProvider>
     </MantineProvider>

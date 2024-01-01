@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Title as Titulo, Table } from "@mantine/core";
+import { Title as Titulo, Table, ScrollArea } from "@mantine/core";
 
 import { firebase } from "../../../api/axiosAPI";
 
 const Tables = () => {
   const [data, setData] = useState("");
+  const [electrovalvula, setElectrovalvula] = useState("");
+  const [ph, setPh] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -12,8 +14,13 @@ const Tables = () => {
 
   const fetchData = async () => {
     try {
-      const res = await firebase.get(`/HUMEDAD.json`)
-      setData(res.data);
+      const res1 = await firebase.get(`/HUMEDAD.json`)
+      const res2 = await firebase.get(`/Ph.json`)
+      const res3 = await firebase.get(`/ELECTROVALVULA_1.json`)
+
+      setData(res1.data);
+      setPh(res2.data);
+      setElectrovalvula(res3.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
@@ -21,7 +28,7 @@ const Tables = () => {
   
   const porcentaje = () => (data*100)/1023
 
-  const info = () => {
+  const Terreno = () => {
     if (data >= 500 <= 1023) {
       return 'Humedo'
     } else {
@@ -32,7 +39,9 @@ const Tables = () => {
   const elements = [
     { info: "Sensor de Humedad", status: data },
     { info: "Humedad (%)", status: porcentaje().toFixed(2) },
-    { info: "Terreno", status: info() },
+    { info: "Estado del Terreno", status: Terreno() },
+    { info: "Escala de Ph", status: ph },
+    { info: "Electroválvula", status: electrovalvula },
   ];
 
   const rows = elements.map((element) => (
@@ -46,8 +55,10 @@ const Tables = () => {
 
   return (
     <>
-     <Titulo ta="center" order={2}>Información:</Titulo>
-      <Table striped highlightOnHover withColumnBorders>
+      <Titulo ta="center" order={2}>Información:</Titulo>
+      
+      <ScrollArea h={250} scrollbarSize={6}>
+        <Table striped highlightOnHover withColumnBorders>
         <thead>
           <tr>
             <th>Parámetro</th>
@@ -55,7 +66,8 @@ const Tables = () => {
           </tr>
         </thead>
         <tbody>{rows}</tbody>
-      </Table>
+        </Table>
+      </ScrollArea>
     </>
   );
 };
