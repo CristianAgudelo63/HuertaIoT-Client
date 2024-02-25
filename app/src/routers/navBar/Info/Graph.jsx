@@ -27,10 +27,17 @@ import { firebase } from "../../../api/axiosAPI";
 
 const Graph = () => {
   const [data, setData] = useState("");
+<<<<<<< HEAD
   const [data2, setData2] = useState("");
   const [data3, setData3] = useState("");
   const [data4, setData4] = useState("");
   const [data5, setData5] = useState("");
+=======
+  // const [data2, setData2] = useState("");
+  // const [data3, setData3] = useState("");
+  // const [data4, setData4] = useState("");
+  // const [data5, setData5] = useState("");
+>>>>>>> 71575f1 (docs: :memo: Updated documentation)
 
   const [time, setTime] = useState("");
   const [time2, setTime2] = useState("");
@@ -46,6 +53,7 @@ const Graph = () => {
   const fetchData = async () => {
     try {
       let res = await firebase.get(`/HUMEDAD1.json`)
+<<<<<<< HEAD
       let res2 = await firebase.get(`/HUMEDAD2.json`)
       let res3 = await firebase.get(`/HUMEDAD3.json`)
       let res4 = await firebase.get(`/HUMEDAD4.json`)
@@ -56,11 +64,28 @@ const Graph = () => {
       setData3(res3.data);
       setData4(res4.data);
       setData5(res5.data);
+=======
+      // let res2 = await firebase.get(`/HUMEDAD2.json`)
+      // let res3 = await firebase.get(`/HUMEDAD3.json`)
+      // let res4 = await firebase.get(`/HUMEDAD4.json`)
+      // let res5 = await firebase.get(`/HUMEDAD5.json`)
+
+      setData(res.data);
+      // setData2(res2.data);
+      // setData3(res3.data);
+      // setData4(res4.data);
+      // setData5(res5.data);
+>>>>>>> 71575f1 (docs: :memo: Updated documentation)
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
+<<<<<<< HEAD
+=======
+  setTimeout(fetchData, 5000)
+
+>>>>>>> 71575f1 (docs: :memo: Updated documentation)
   const fetchTime = async () => {
     try {
       let res = await firebase.get(`/FECHAYHORA.json`)
@@ -105,8 +130,13 @@ const Graph = () => {
     },
   };
 
+<<<<<<< HEAD
   window.setInterval(fetchData, 5000);
   window.setInterval(fetchTime, 5000);
+=======
+  window.setInterval(fetchData, 2000);
+  window.setInterval(fetchTime, 2000);
+>>>>>>> 71575f1 (docs: :memo: Updated documentation)
 
   return (
     <Line data={datos} options={options} />
