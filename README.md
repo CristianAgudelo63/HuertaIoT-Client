@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# Huerta IoT Client
-
-Proyecto: Internet de las Cosas Aplicado en Huertas Inteligentes para un Sistema de Riego y Monitoreo Autónomo
-=======
 # Cliente Web Para El Internet de las Cosas Aplicado en Huertas Inteligentes para un Sistema de Riego y Monitoreo Autónomo
 
 _Proyecto de código abierto para automatizar el sistema de regado y control de variables en huertas con Arduino/ESP32 y Firebase._
@@ -48,4 +43,3 @@ Aquí encontrará toda la documentación para desarrolladores, en donde se expli
 - Malena Hernández Menco
 - Yoiner A. Leudo Córdoba
 - Yuliana Osorio García
->>>>>>> 71575f1 (docs: :memo: Updated documentation)
