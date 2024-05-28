@@ -1,9 +1,9 @@
-import { MantineProvider, Box, createStyles } from "@mantine/core";
 import { AuthContextProvider } from './context'
+import { createStyles, Box } from "@mantine/core";
 
 import Head from "./components/Header";
 import Footer from "./components/Footer";
-import { Rutas } from "./routers"
+import Rutas from "./routers";
 
 const useStyles = createStyles((theme) => ({
   background: {
@@ -21,15 +21,13 @@ const App = () => {
   const { classes } = useStyles();
 
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={{ fontFamily: "Montserrat" }}>
-      <AuthContextProvider>
-        <Box className={classes.background}>
-          <Head />
-          <Rutas />
-          <Footer/>
-        </Box>
-      </AuthContextProvider>
-    </MantineProvider>
+    <AuthContextProvider>
+      <Box className={classes.background}>
+        <Head />
+        <Rutas />
+        <Footer/>
+      </Box>
+    </AuthContextProvider>
   );
 };
 
