@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Title as Titulo, Table, ScrollArea } from "@mantine/core";
-
 import { firebase } from "../../../api/axiosAPI";
 
 const Tables = () => {
@@ -44,8 +43,8 @@ const Tables = () => {
     { info: "Electroválvula", status: electrovalvula },
   ];
 
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
+  const rows = elements.map((element, index) => (
+    <tr key={index}>
       <td>{element.info}</td>
       <td>{element.status}</td>
     </tr>
@@ -59,13 +58,13 @@ const Tables = () => {
       
       <ScrollArea h={250} scrollbarSize={6}>
         <Table striped highlightOnHover withColumnBorders>
-        <thead>
-          <tr>
-            <th>Parámetro</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
         </Table>
       </ScrollArea>
     </>

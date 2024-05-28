@@ -4,7 +4,7 @@ import Main from "../pages/Main";
 import Page404 from "../pages/Page404";
 import Switch from "./navBar/Controls/Switch";
 
-export const Rutas = () => {
+const Rutas = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -15,3 +15,5 @@ export const Rutas = () => {
     </BrowserRouter>
   )
 }
+
+export default Rutas;
